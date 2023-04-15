@@ -1,8 +1,10 @@
 package ru.itgirl.firstspringproject.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 //@RestController означает, что класс описывает конечную точку, которая должна быть доступна через веб
 //@GetMapping("/hello") означает, что метод hello() будет использоваться для ответа на запросы,
@@ -49,7 +51,7 @@ public class FirstController {
             }
             return String.format("Сегодня %s!", dayOfWeekInRussian);
         } catch (Exception e) {
-            return "Неверное название дня недели";
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "неверное название дня недели");
         }
     }
 
