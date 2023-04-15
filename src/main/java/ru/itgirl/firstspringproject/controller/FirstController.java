@@ -22,10 +22,10 @@ public class FirstController {
     }
 
     @GetMapping("/dayOfWeek")
-    public String dayOfWeek(@RequestParam(value = "name", defaultValue = "MONDAY") DayOfWeek name) {
+    public String dayOfWeek(@RequestParam(value = "name", defaultValue = "MONDAY") String name) {
         String dayOfWeekInRussian = "Понедельник";
         try {
-            switch (name) {
+            switch (DayOfWeek.valueOf(name)) {
                 case MONDAY:
                     dayOfWeekInRussian = "Понедельник";
                     break;
@@ -51,7 +51,7 @@ public class FirstController {
             }
             return String.format("Сегодня %s!", dayOfWeekInRussian);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "неверное название дня недели");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "НЕВЕРНОЕ НАЗВАНИЕ ДНЯ НЕДЕЛИ");
         }
     }
 
